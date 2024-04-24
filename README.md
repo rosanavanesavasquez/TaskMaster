@@ -1,6 +1,6 @@
 # TaskMaster
-Proyecto: TaskMaster
-Nombre de la aplicación: TaskMasterApp
+# Proyecto: TaskMaster
+# Nombre de la aplicación: TaskMasterApp
 # Gestor de Tareas: 
 Aplicación web donde los usuarios puedan registrar, organizar y gestionar sus tareas diarias. Puedes tener modelos para las tareas, usuarios y categorías, formularios para agregar nuevas tareas, buscar tareas por nombre o categoría, y vistas para ver las tareas pendientes
 # Diseño de la base de datos:
