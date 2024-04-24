@@ -7,7 +7,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 
 #LOGIN - LOGOUT
 
@@ -29,7 +36,22 @@ def user_login_view(request):
                 return redirect("home")
 
     return render(request, "TaskManagerApp/login.html", {"ROSANA": form})
+#user edit
+# -----------------------------------------------------------------------------
 
+from django.contrib.auth.models import User
+from .forms import UserEditForm
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserEditForm
+    template_name = 'TaskManagerApp/user_edit_form.html'
+    success_url = reverse_lazy('home')
+
+    def get_object(self):
+        return self.request.user
+#user edit fin
+# -----------------------------------------------------------------------------
 def homeview(request):
     return render(request, "TaskManagerApp/home.html")
 

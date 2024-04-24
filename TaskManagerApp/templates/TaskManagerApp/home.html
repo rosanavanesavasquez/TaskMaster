@@ -1,9 +1,27 @@
 {% extends 'TaskManagerApp/base.html' %}
 
-{% block title %} TaskManagerApp {% endblock title %}
+{% block title %} TaskMasterApp {% endblock title %}
 
 {% block content %}
-<section>
-    <h2>Bienvendios a la home de Tareas!</h2>
-</section>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Información del Proyecto</div>
+
+                <div class="card-body">
+                    <h4>Proyecto: TaskMaster</h4>
+                    <p><strong>Nombre de la aplicación:</strong> TaskMasterApp</p>
+
+                    <h5>Gestor de Tareas:</h5>
+                    <p>Aplicación web donde los usuarios puedan registrar, organizar y gestionar sus tareas diarias. Puedes tener modelos para las tareas, usuarios y categorías, formularios para agregar nuevas tareas, buscar tareas por nombre o categoría, y vistas para ver las tareas pendientes, completadas, etc.</p>
+
+                    <h5>Autor: Rosana Vanesa Vasquez</h5>
+                    <p><strong>Perfil Linkedin:</strong> <a href="https://www.linkedin.com/in/rosana-vanesa-v%C3%A1squez-4a56b940/">Rosana Vanesa Vásquez</a></p>
+                    <p><strong>Repositorio GitHub:</strong> <a href="https://github.com/rosanavanesavasquez/TaskMaster">rosanavanesavasquez/TaskMaster</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

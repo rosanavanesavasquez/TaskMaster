@@ -22,8 +22,13 @@ class Tarea(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True, blank=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    facebook_url = models.URLField(max_length=200, null=True, blank=True)
     # Otros campos de perfil como foto, biografía, etc.
 
     def __str__(self):
         return self.user.username
+
 
