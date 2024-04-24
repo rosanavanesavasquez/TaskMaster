@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Tarea</title>
+</head>
+<body>
+    <h1>Detalle de Tarea</h1>
+
+    <ul>
+        <li><strong>Nombre:</strong> {{ tarea.nombre }}</li>
+        <li><strong>Descripción:</strong> {{ tarea.descripcion }}</li>
+        <li><strong>Fecha de Creación:</strong> {{ tarea.fecha_creacion }}</li>
+        <li><strong>Fecha Límite:</strong> {{ tarea.fecha_limite }}</li>
+        <li><strong>Categoría:</strong> {{ tarea.categoria }}</li>
+        <li><strong>Completada:</strong> {{ tarea.completada }}</li>
+    </ul>
+</body>
+</html>
