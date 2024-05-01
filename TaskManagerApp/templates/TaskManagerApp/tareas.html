@@ -38,7 +38,7 @@
                 <th>Fecha de Creación</th>
                 <th>Fecha Límite</th>
                 <th>Categoría</th>
-                <th>Completada</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -49,7 +49,7 @@
                 <td>{{ tarea.fecha_creacion }}</td>
                 <td>{{ tarea.fecha_limite }}</td>
                 <td>{{ tarea.categoria }}</td>
-                <td>{{ tarea.completada }}</td>
+                <td>{% if tarea.completada %} Completa {% else %} Pendiente {% endif %}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -57,4 +57,3 @@
     <p><a href="{% url 'home' %}">Volver a Home</a></p>
 </body>
 </html>
-

@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Categoría</title>
+    <title>Listar Categorías</title>
 </head>
 <body>
-    <h1>Crear Nueva Categoría</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Crear Categoría</button>
-    </form>
+  <h1>Listado de Categorías</h1>
+  <ul>
+    {% for categoria in categorias %}
+      <li>{{ categoria.nombre }}</li>
+    {% endfor %}
+  </ul>
+
     <p><a href="{% url 'home' %}">Volver a Home</a></p>
+
 </body>
 </html>
+
