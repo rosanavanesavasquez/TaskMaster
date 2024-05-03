@@ -8,13 +8,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Información del Proyecto</div>
-
                 <div class="card-body">
                     <h4>Proyecto: TaskMaster</h4>
                     <p><strong>Nombre de la aplicación:</strong> TaskMasterApp</p>
 
                     <h5>Gestor de Tareas:</h5>
-                    <p>Aplicación web donde los usuarios puedan registrar, organizar y gestionar sus tareas diarias. Puedes tener modelos para las tareas, usuarios y categorías, formularios para agregar nuevas tareas, buscar tareas por nombre o categoría, y vistas para ver las tareas pendientes, completadas, etc.</p>
+                    <p>Es una Aplicación donde los usuarios puedan registrar, organizar y gestionar sus tareas diarias. El objetivo principal es ayudar a personas con problemas de memoria para el seguimiento de sus tareas cotidianas.</p>
 
                     <h5>Autor: Rosana Vanesa Vasquez</h5>
                     <p><strong>Perfil Linkedin:</strong> <a href="https://www.linkedin.com/in/rosana-vanesa-v%C3%A1squez-4a56b940/">Rosana Vanesa Vásquez</a></p>
@@ -24,12 +23,13 @@
         </div>
     </div>
 </div>
+
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container text-center">
         {% if user.is_authenticated %}
-
         <a class="btn btn-secondary" href="{% url 'editar-perfil' %}">Editar Perfil</a>
         {% endif %}
     </div>
 </footer>
 {% endblock %}
+

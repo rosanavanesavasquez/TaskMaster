@@ -39,6 +39,7 @@
                 <th>Fecha Límite</th>
                 <th>Categoría</th>
                 <th>Estado</th>
+                <th>Acciones</th> <!-- Nueva columna para botones de acción -->
             </tr>
         </thead>
         <tbody>
@@ -50,6 +51,20 @@
                 <td>{{ tarea.fecha_limite }}</td>
                 <td>{{ tarea.categoria }}</td>
                 <td>{% if tarea.completada %} Completa {% else %} Pendiente {% endif %}</td>
+                <td>
+                    <form action="{% url 'tarea-delete' tarea.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+                <td>
+                    {% if not tarea.completada %}
+                        <form action="{% url 'tarea-complete' tarea.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" name="action" value="complete">Marcar como completa</button>
+                        </form>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

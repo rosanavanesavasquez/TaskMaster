@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de búsqueda de categorías</title>
+</head>
+<body>
+    <h1>Resultados de búsqueda de categorías</h1>
+    
+    {% if categorias %}
+        <ul>
+            {% for categoria in categorias %}
+                <li>{{ categoria.nombre }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron categorías que coincidan con la búsqueda.</p>
+    {% endif %}
+    
+    <a href="{% url 'buscar_categoria' %}">Volver a la búsqueda</a>
+</body>
+</html>

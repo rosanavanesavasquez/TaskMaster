@@ -1,16 +1,16 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from TaskManagerApp.models import Tarea, Categoria, UserProfile
-from .forms import TareaForm, CategoriaForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .forms import UserEditForm
+from TaskManagerApp.models import Tarea, Categoria, UserProfile
+from .forms import TareaForm, CategoriaForm, UserProfileForm, EditarCategoriaForm
+from .forms import UserEditForm, BuscarCategoriaForm, EditarCategoriaForm, BorrarCategoriaForm 
 from django.views.generic import (
     ListView,
     DetailView,
@@ -38,7 +38,12 @@ def user_login_view(request):
                 login(request, user)
                 return redirect("home")
 
-    return render(request, "TaskManagerApp/login.html", {"ROSANA": form})
+    return render(request, "TaskManagerApp/login.html", {"ROSANA": form}) #acá le paso el form:form pero le puse "rosana" como ejemplo
+
+def aboutme_view(request):
+    return render(request, 'TaskManagerApp/aboutme.html')
+
+
 #user edit
 # -----------------------------------------------------------------------------
 def registro_usuario(request):
@@ -108,17 +113,6 @@ def tareas(request):
     return render(request, 'TaskManagerApp/tareas.html', {'tareas': tareas})
 
 @login_required
-def detalle_tarea(request, tarea_id):
-    # Obtener los detalles de una tarea específica
-    tarea = Tarea.objects.get(pk=tarea_id)
-    return render(request, 'TaskManagerApp/detalle_tarea.html', {'tarea': tarea})
-
-def index(request):
-    # Obtener las tareas pendientes
-    tareas_pendientes = Tarea.objects.filter(completada=False)
-    return render(request, 'TaskManagerApp/index.html', {'tareas': tareas_pendientes})
-
-@login_required
 def crear_tarea(request):
     if request.method == 'POST':
         form = TareaForm(request.POST)
@@ -131,6 +125,19 @@ def crear_tarea(request):
     else:
         form = TareaForm()
     return render(request, 'TaskManagerApp/crear_tarea.html', {'form': form})
+
+@login_required
+def tarea_delete_view(request, tarea_id):
+    tarea = get_object_or_404(Tarea, pk=tarea_id)
+    tarea.delete()
+    return redirect('tareas')  # Después de eliminar la tarea, redirige a la lista de tareas.
+
+@login_required
+def tarea_complete_view(request, tarea_id):
+    tarea = get_object_or_404(Tarea, pk=tarea_id)
+    tarea.completada = True
+    tarea.save()
+    return redirect('tareas')  # Redirigir a la lista de tareas después de completar la tarea.
 # ----------------------FIN TAREAS-------------------------------------------------------
 
 
@@ -151,5 +158,30 @@ def listar_categorias (request):
     # Obtener todas las categorias
     categorias = Categoria.objects.all()
     return render(request, 'TaskManagerApp/listar_categorias.html', {'categorias': categorias})
+
+@login_required
+def buscar_categoria(request):
+    if request.method == 'POST':
+        form = BuscarCategoriaForm(request.POST)
+        if form.is_valid():
+            nombre_categoria = form.cleaned_data['nombre']
+            categorias = Categoria.objects.filter(nombre__icontains=nombre_categoria)
+            return render(request, 'TaskManagerApp/buscar_categoria_resultado.html', {'categorias': categorias})
+    else:
+        form = BuscarCategoriaForm()
+    return render(request, 'TaskManagerApp/buscar_categoria.html', {'form': form})
+
+@login_required
+class CategoriaUpdateView(UpdateView):
+    model = Categoria
+    form_class = EditarCategoriaForm
+    template_name = 'editar_categoria.html'
+    success_url = reverse_lazy('listar_categorias')
+
+@login_required
+class CategoriaDeleteView(DeleteView):
+    model = Categoria
+    template_name = 'borrar_categoria.html'
+    success_url = reverse_lazy('listar_categorias')
 
  #----------------------FIN CATEGORIAS-------------------------------------------------------

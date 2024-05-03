@@ -1,0 +1,13 @@
+{% extends 'TaskManagerApp/base.html' %}
+
+{% block title %} TaskMasterApp {% endblock title %}
+
+{% block content %}
+<h2>Buscar Categoría</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+<p><a href="{% url 'home' %}">Volver a Home</a></p>
+{% endblock %}

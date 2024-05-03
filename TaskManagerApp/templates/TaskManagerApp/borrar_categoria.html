@@ -1,0 +1,25 @@
+{% extends 'TaskManagerApp/base.html' %}
+
+{% block title %} TaskMasterApp {% endblock title %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrar categoría</title>
+</head>
+<body>
+    <h1>Borrar categoría</h1>
+    <p>¿Estás seguro de que deseas borrar la categoría "{{ categoria.nombre }}"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Confirmar</button>
+    </form>
+    
+    <a href="{% url 'listar_categorias' %}">Cancelar</a>
+</body>
+</html>
+
+{% endblock %}

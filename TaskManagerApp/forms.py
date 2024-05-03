@@ -13,11 +13,30 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['birth_date', 'phone_number', 'address', 'facebook_url']
+        # Agrega otros campos de perfil que quieras incluir en el formulario
+
+#--------------CATEGORIA----------------------------------------------------------
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
         fields = ['nombre']
 
+class BuscarCategoriaForm(forms.Form):
+    nombre = forms.CharField(label='Nombre de la categoría', max_length=100)
+
+class EditarCategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = ['nombre']  # Campos a editar en la categoría
+
+class BorrarCategoriaForm(forms.Form):
+    confirmacion = forms.BooleanField(label='¿Estás seguro de que deseas eliminar esta categoría?', required=True)
+
+#--------------FIN CATEGORIA----------------------------------------------------------
 class TareaForm(forms.ModelForm):
     class Meta:
         model = Tarea
@@ -26,8 +45,3 @@ class TareaForm(forms.ModelForm):
             'fecha_limite': forms.DateInput(attrs={'type': 'date'}),
         }
         
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ['birth_date', 'phone_number', 'address', 'facebook_url']
-        # Agrega otros campos de perfil que quieras incluir en el formulario
